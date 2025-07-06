@@ -162,9 +162,9 @@ textarea {
 }
 
 .publish-button {
-    background-color: #81FE88;
-    color: var(--tag-color);
-    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
     position: relative;
 }
 
@@ -180,4 +180,57 @@ textarea {
     top: 50%;
     transform: translateY(-50%);
     margin-left: 8px;
+}
+
+.container-description {
+    width: 422px;
+}
+
+.main-image {
+    border-radius: 8px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-image {
+    height: 368px;
+    padding: 24px 16px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+.container-upload-image button {
+    margin: 16px 0 8px 0;
+    background-color: var(--itens-background);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--secondary-color);
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+}
+
+.container-upload-image button::after {
+    content: "";
+    background-image: url("./img/upload.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px;
+}
+
+.container-image-name {
+    display: flex;
+    gap: 8px;
+    color: var(--secondary-color);
+    font-size: 15px;
 }
