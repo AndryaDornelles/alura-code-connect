@@ -37,3 +37,19 @@ inputUpload.addEventListener('change', async (event) => {
 
     }
 });
+
+const tagsInput = document.getElementById("category");
+const tagsList = document.getElementById("tags-list");
+tagsInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const tagValue = tagsInput.value.trim();
+        if (tagValue !== ""){
+            const newTag = document.createElement("li");
+            newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg">`;
+            tagsList.appendChild(newTag)
+            tagsInput.value = "";
+        }
+        
+    }
+})

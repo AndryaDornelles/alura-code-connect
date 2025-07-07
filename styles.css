@@ -31,7 +31,7 @@ body {
 aside {
     background-color: var(--itens-background);
     border-radius: 10px;
-    height: 100%;
+    height: 100vh;
     padding: 40px;
     text-align: center;
 }
@@ -122,6 +122,7 @@ textarea {
 
 .tags-list {
     display: flex;
+    gap: 8px;
 }
 
 .container-buttons-items {
