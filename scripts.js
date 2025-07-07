@@ -46,10 +46,19 @@ tagsInput.addEventListener("keypress", (event) => {
         const tagValue = tagsInput.value.trim();
         if (tagValue !== ""){
             const newTag = document.createElement("li");
-            newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg">`;
+            newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg" class="remove-tag">`;
             tagsList.appendChild(newTag)
             tagsInput.value = "";
         }
         
     }
-})
+});
+
+tagsList.addEventListener('click', (event) => {
+  // Verifica se o clique veio de um <li>
+	if(event.target.classList.contains("remove-tag")) {
+        const removeTag = event.target.parentElement;
+        tagsList.removeChild(removeTag);
+	}
+});
+
