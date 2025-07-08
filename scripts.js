@@ -62,3 +62,12 @@ tagsList.addEventListener('click', (event) => {
 	}
 });
 
+const tagsAvailable = ["Front-end", "Back-end", "Full-stack", "DevOps", "Mobile", "Data Science", "UI/UX Design", "Machine Learning"];
+
+async function fetchTags() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(tagsAvailable.includes(tagValue));
+        }, 1000);
+    })
+}
