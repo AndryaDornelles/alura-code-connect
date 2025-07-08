@@ -41,22 +41,6 @@ inputUpload.addEventListener('change', async (event) => {
 const tagsInput = document.getElementById("category");
 const tagsList = document.getElementById("tags-list");
 
-tagsInput.addEventListener("keypress", async (event) => {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        const tagValue = tagsInput.value.trim();
-        if ( await tagsAvailable.includes(tagValue) && tagValue !== "" && !Array.from(tagsList.children).some(li => li.textContent.includes(tagValue))) {
-            const newTag = document.createElement("li");
-            newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg" class="remove-tag">`;
-            tagsList.appendChild(newTag)
-            tagsInput.value = "";
-        } else {
-            alert("Tag inválida ou já existente. Por favor, escolha uma tag diferente.");
-        }
-        
-    }
-});
-
 tagsList.addEventListener('click', (event) => {
   // Verifica se o clique veio de um <li>
 	if(event.target.classList.contains("remove-tag")) {
@@ -67,10 +51,33 @@ tagsList.addEventListener('click', (event) => {
 
 const tagsAvailable = ["Front-end", "Back-end", "Full-stack", "DevOps", "Mobile", "Data Science", "UI/UX Design", "Machine Learning"];
 
-async function fetchTags() {
+async function verifyTags() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(tagsAvailable.includes(tagValue));
         }, 1000);
     })
 }
+
+tagsInput.addEventListener("keypress", async (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const tagValue = tagsInput.value.trim();
+        if ( tagsAvailable.includes(tagValue) && tagValue !== "" && !Array.from(tagsList.children).some(li => li.textContent.includes(tagValue))) {
+            try {
+                const tagExists = await verifyTags(tagValue);
+                if(tagExists) {
+                    const newTag = document.createElement("li");
+                    newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg" class="remove-tag">`;
+                    tagsList.appendChild(newTag)
+                    tagsInput.value = "";
+                } else {
+                    alert.error("Tag inválida ou já existente.");
+                }
+            } catch (error) {
+                console.error("Erro ao verificar a tag:", error);
+                alert("Erro ao verificar a tag. Por favor, tente novamente.");
+            }
+        }
+    }
+});
