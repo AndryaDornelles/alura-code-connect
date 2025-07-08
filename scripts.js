@@ -40,15 +40,18 @@ inputUpload.addEventListener('change', async (event) => {
 
 const tagsInput = document.getElementById("category");
 const tagsList = document.getElementById("tags-list");
-tagsInput.addEventListener("keypress", (event) => {
+
+tagsInput.addEventListener("keypress", async (event) => {
     if (event.key === "Enter") {
         event.preventDefault();
         const tagValue = tagsInput.value.trim();
-        if (tagValue !== ""){
+        if ( await tagsAvailable.includes(tagValue) && tagValue !== "" && !Array.from(tagsList.children).some(li => li.textContent.includes(tagValue))) {
             const newTag = document.createElement("li");
             newTag.innerHTML = `<p>${tagValue}</p> <img src="img/close-black.svg" class="remove-tag">`;
             tagsList.appendChild(newTag)
             tagsInput.value = "";
+        } else {
+            alert("Tag inválida ou já existente. Por favor, escolha uma tag diferente.");
         }
         
     }
