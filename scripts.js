@@ -16,7 +16,7 @@ function readFileContent(file) {
             reject(`Error reading file ${file.name}`);
         }
 
-        return reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     })
 }
 
@@ -34,7 +34,6 @@ inputUpload.addEventListener('change', async (event) => {
         } catch (error) {
             console.error("Error reading file:", error);
         }
-
     }
 });
 
@@ -42,7 +41,6 @@ const tagsInput = document.getElementById("category");
 const tagsList = document.getElementById("tags-list");
 
 tagsList.addEventListener('click', (event) => {
-  // Verifica se o clique veio de um <li>
 	if(event.target.classList.contains("remove-tag")) {
         const removeTag = event.target.parentElement;
         tagsList.removeChild(removeTag);
@@ -51,7 +49,7 @@ tagsList.addEventListener('click', (event) => {
 
 const tagsAvailable = ["Front-end", "Back-end", "Full-stack", "DevOps", "Mobile", "Data Science", "UI/UX Design", "Machine Learning"];
 
-async function verifyTags() {
+async function verifyTags(tagValue) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(tagsAvailable.includes(tagValue));
@@ -80,4 +78,15 @@ tagsInput.addEventListener("keypress", async (event) => {
             }
         }
     }
+});
+
+const publishBtn = document.querySelector(".publish-button");
+
+publishBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const projectName = document.getElementById('name').value;
+    const projectDescription = document.getElementById('description').value;
+    const projectTags = Array.from(tagsList.querySelectorAll("p")).map((category) => category.textContent);
+
 });
