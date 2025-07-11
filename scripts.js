@@ -82,6 +82,20 @@ tagsInput.addEventListener("keypress", async (event) => {
 
 const publishBtn = document.querySelector(".publish-button");
 
+async function projectSubmit(projectName, projectDescription, projectTags) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const itWork = Math.random() > 0.5;
+
+            if(itWork) {
+                resolve("Project publish");
+            } else {
+                reject("Error to publish");
+            }
+        }, 2000)
+    })
+}
+
 publishBtn.addEventListener('click', async (event) => {
     event.preventDefault();
 
@@ -89,4 +103,26 @@ publishBtn.addEventListener('click', async (event) => {
     const projectDescription = document.getElementById('description').value;
     const projectTags = Array.from(tagsList.querySelectorAll("p")).map((category) => category.textContent);
 
+    try {
+        const result = await projectSubmit(projectName, projectDescription, projectTags);
+        console.log(result);
+        alert('Deu tudo certo!');   
+    } catch (error) {
+        console.log('Deu erro!', error);
+        alert('Deu tudo errado!');
+    }
+
 });
+
+const discardBtn = document.querySelector(".discard-button");
+
+discardBtn.addEventListener('click', event => {
+    event.preventDefault();
+
+    const forms = document.querySelector('form');
+    forms.reset();
+
+    imageContainer.src="./img/imagem1.png";
+    imageName.textContent = "image_projeto.png";
+    tagsList.innerHTML = '';
+})
